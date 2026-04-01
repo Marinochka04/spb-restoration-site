@@ -56,13 +56,13 @@
  
 .about-cert { display: flex; align-items: flex-start; gap: 16px; }
 .cert-icon {
-  width: 36px; height: 36px;
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  color: var(--gold);
-  font-size: 0.9rem;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  margin-top: 6px;
 }
+
 .cert-text {
   font-size: 0.85rem;
   line-height: 1.65;

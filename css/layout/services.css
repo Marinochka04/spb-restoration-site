@@ -42,7 +42,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 2.6rem;
   font-weight: 900;
-  color: rgba(184,154,94,0.12);
+  color: rgba(184,154,94,0.3);
   line-height: 1;
   margin-bottom: 20px;
 }
@@ -57,7 +57,7 @@
 .service-desc {
   font-size: 0.84rem;
   line-height: 1.8;
-  color: rgba(255,255,255,0.38);
+  color: rgba(255,255,255,0.45);
   font-weight: 300;
 }
 .service-line {
