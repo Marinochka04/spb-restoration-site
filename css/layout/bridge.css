@@ -1,0 +1,61 @@
+/* ─── BRIDGE STRIP (между hero и about) ─── */
+.bridge {
+  background: var(--stone);
+  padding: 0 60px 60px;
+  position: relative;
+  z-index: 5;
+  margin-top: -2px;
+}
+ 
+.bridge-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--stone-mid);
+  background: #fff;
+}
+ 
+.bridge-stat {
+  padding: 36px 44px;
+  border-right: 1px solid var(--stone-mid);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  transition: background 0.3s;
+}
+.bridge-stat:last-child { border-right: none; }
+.bridge-stat:hover { background: var(--stone); }
+ 
+.bridge-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+ 
+.bridge-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--stone-mid);
+  flex-shrink: 0;
+}
+ 
+.bridge-text {}
+.bridge-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin-bottom: 5px;
+}
+.bridge-sub {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  font-weight: 300;
+}

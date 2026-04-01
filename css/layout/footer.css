@@ -1,0 +1,42 @@
+/* ─── FOOTER ─── */
+footer {
+  background: #0E0C0A;
+  padding: 32px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(184,154,94,0.1);
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.05em;
+}
+.footer-logo span { color: var(--gold); }
+.footer-copy {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+}
+ 
+/* ─── FORM SUCCESS ─── */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 48px 20px;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.95rem;
+  line-height: 1.85;
+  font-weight: 300;
+}
+.form-success strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 12px;
+}

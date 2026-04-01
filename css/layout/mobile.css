@@ -1,0 +1,28 @@
+/* ─── MOBILE ─── */
+@media (max-width: 1024px) {
+  nav { padding: 18px 32px; }
+  .nav-links { display: none; }
+  section { padding: 72px 32px; }
+  #hero { padding: 0; }
+  .hero-content { padding: 0 32px 72px; }
+  .hero-stats { display: none; }
+  .scroll-line { left: 32px; }
+  .about-inner { grid-template-columns: 1fr; }
+  .about-left, .about-right { padding: 48px 32px; }
+  .about-right { padding-top: 0; }
+  #services { padding: 72px 32px; }
+  .services-header { flex-direction: column; align-items: flex-start; gap: 24px; margin-bottom: 40px; }
+  .services-grid { grid-template-columns: 1fr; }
+  #cases { padding: 72px 32px; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .case-card:first-child { grid-column: auto; }
+  .adv-inner { grid-template-columns: 1fr; gap: 40px; }
+  #advantages { padding: 72px 32px; }
+  .adv-grid { grid-template-columns: 1fr; gap: 36px; }
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .process-steps::before { display: none; }
+  #process { padding: 72px 32px; }
+  .contacts-inner { grid-template-columns: 1fr; gap: 56px; }
+  #contacts { padding: 72px 32px; }
+  footer { padding: 24px 32px; flex-direction: column; gap: 12px; text-align: center; }
+}

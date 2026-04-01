@@ -1,0 +1,31 @@
+:root {
+  --gold: #B89A5E;
+  --gold-light: #D4B87A;
+  --charcoal: #1A1A1A;
+  --warm-dark: #141210;
+  --stone: #F4F0EB;
+  --stone-mid: #E8E2D9;
+  --text-main: #2A2520;
+  --text-muted: #6B6157;
+  --text-light: #9A8F85;
+  --border: rgba(184,154,94,0.25);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 300;
+  color: var(--text-main);
+  background: var(--stone);
+  overflow-x: hidden;
+}
+
+.spb-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}

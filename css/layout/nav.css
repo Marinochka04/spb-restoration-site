@@ -1,0 +1,54 @@
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 60px;
+  background: rgba(20,18,16,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,154,94,0.15);
+  transition: padding 0.4s;
+}
+nav.scrolled { padding: 14px 60px; }
+ 
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: #fff;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+ 
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: color 0.3s;
+  font-weight: 400;
+}
+.nav-links a:hover { color: var(--gold); }
+ 
+.nav-cta {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 9px 22px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--warm-dark); }

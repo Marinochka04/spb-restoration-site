@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>АРС — Архитектурная реставрационная служба</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #C0392B;
+  --black: #0D0D0D;
+  --gray-90: #1A1A1A;
+  --gray-60: #5C5C5C;
+  --gray-30: #B0B0B0;
+  --gray-10: #F0EFED;
+  --white: #FAFAF8;
+  --line: #D8D6D2;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 300;
+  color: var(--black);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+/* ─── UTILITY ─── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 64px; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.07); }
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 64px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-mark {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--black);
+  letter-spacing: -0.01em;
+}
+.logo-mark span { color: var(--red); }
+.logo-sep { width: 1px; height: 16px; background: var(--line); }
+.logo-sub {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-60);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+}
+.nav-links li { border-left: 1px solid var(--line); }
+.nav-links a {
+  display: block;
+  padding: 0 20px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-60);
+  text-decoration: none;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover { color: var(--black); background: var(--gray-10); }
+.nav-cta-wrap { border-left: 1px solid var(--line); }
+.nav-cta {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 28px;
+  background: var(--red);
+  color: #fff !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.25s !important;
+}
+.nav-cta:hover { background: #a02d22 !important; color: #fff !important; }
+
+/* ─── HERO ─── */
+#hero {
+  padding-top: 64px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-left {
+  padding: 80px 64px 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--line);
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeIn 0.6s 0.2s forwards;
+}
+.eyebrow-line { width: 32px; height: 1px; background: var(--red); }
+.eyebrow-text {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(3.4rem, 5.5vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  opacity: 0;
+  animation: slideUp 0.8s 0.35s forwards;
+}
+.hero-title .italic { font-style: italic; color: var(--gray-60); }
+.hero-title .accent { color: var(--red); }
+
+.hero-bottom {
+  opacity: 0;
+  animation: fadeIn 0.7s 0.7s forwards;
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--gray-60);
+  max-width: 420px;
+  margin-bottom: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.hero-actions { display: flex; gap: 0; }
+.btn-red {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 32px;
+  border: 1px solid var(--red);
+  transition: all 0.25s;
+}
+.btn-red:hover { background: #a02d22; border-color: #a02d22; }
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--black);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 32px;
+  border: 1px solid var(--line);
+  border-left: none;
+  transition: all 0.25s;
+}
+.btn-outline:hover { border-color: var(--black); }
+
+.hero-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-img-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1s 0.5s forwards;
+}
+.hero-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: transform 1.2s ease, filter 0.6s;
+}
+.hero-img-wrap:hover img { transform: scale(1.03); filter: grayscale(0%); }
+
+.hero-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  opacity: 0;
+  animation: fadeIn 0.7s 0.9s forwards;
+}
+.stat-block {
+  padding: 28px 28px;
+  border-right: 1px solid var(--line);
+}
+.stat-block:last-child { border-right: none; }
+.stat-n {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--black);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-n em { font-style: normal; color: var(--red); }
+.stat-l {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-30);
+}
+
+/* ─── SECTION COMMONS ─── */
+.sec { padding: 96px 0; border-bottom: 1px solid var(--line); }
+
+.sec-header {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  margin-bottom: 64px;
+  align-items: start;
+}
+
+.sec-num {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding-top: 8px;
+  border-top: 2px solid var(--red);
+  display: inline-block;
+  width: 100%;
+}
+
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+}
+.sec-title em { font-style: italic; color: var(--gray-60); }
+
+/* ─── ABOUT ─── */
+#about { background: var(--white); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--gray-60);
+  margin-bottom: 22px;
+}
+.about-text p strong { color: var(--black); font-weight: 600; }
+
+.about-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cert-row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  align-items: start;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+}
+.cert-row:last-child { border-bottom: 1px solid var(--line); }
+
+.cert-idx {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gray-10);
+  line-height: 1;
+  /* outline trick */
+  -webkit-text-stroke: 1px var(--line);
+}
+
+.cert-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 8px;
+}
+.cert-desc {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--gray-60);
+}
+
+.about-photo {
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.about-photo img {
+  width: 100%;
+  display: block;
+  filter: grayscale(25%);
+  transition: filter 0.5s;
+}
+.about-photo:hover img { filter: grayscale(0%); }
+.photo-caption {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-30);
+  margin-top: 12px;
+}
+
+/* ─── SERVICES ─── */
+#services { background: var(--gray-10); }
+
+.services-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+}
+
+.srv {
+  padding: 40px 36px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+  transition: background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.srv:nth-child(3n) { border-right: none; }
+.srv:nth-child(n+4) { border-bottom: none; }
+.srv:hover { background: var(--gray-10); }
+
+.srv::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--red);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s;
+}
+.srv:hover::before { transform: scaleY(1); }
+
+.srv-num {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 20px;
+}
+
+.srv-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+.srv-desc {
+  font-size: 0.84rem;
+  line-height: 1.75;
+  color: var(--gray-60);
+}
+
+/* ─── CASES ─── */
+#cases { background: var(--white); }
+
+.cases-list { display: flex; flex-direction: column; gap: 0; }
+
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.case-row:last-child { border-bottom: 1px solid var(--line); }
+.case-row:hover { background: var(--gray-10); }
+.case-row.reverse { direction: rtl; }
+.case-row.reverse > * { direction: ltr; }
+
+.case-photo {
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 4/3;
+}
+.case-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: transform 0.8s ease, filter 0.5s;
+  display: block;
+}
+.case-row:hover .case-photo img {
+  transform: scale(1.04);
+  filter: grayscale(0%);
+}
+
+.case-info {
+  padding: 48px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--line);
+}
+.case-row.reverse .case-info {
+  border-left: none;
+  border-right: 1px solid var(--line);
+}
+
+.case-addr {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.case-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  color: var(--black);
+  margin-bottom: 20px;
+}
+
+.case-desc {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--gray-60);
+  margin-bottom: 28px;
+}
+
+.case-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-60);
+  background: var(--gray-10);
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+}
+
+/* ─── ADVANTAGES ─── */
+#advantages { background: var(--black); }
+#advantages .sec-num { border-color: var(--red); color: var(--red); }
+#advantages .sec-title { color: var(--white); }
+#advantages .sec-title em { color: var(--gray-30); }
+
+.adv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+.adv-card {
+  padding: 44px 40px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.3s;
+}
+.adv-card:hover { background: rgba(255,255,255,0.03); }
+.adv-card:nth-child(3n) { border-right: none; }
+.adv-card:nth-child(n+4) { border-bottom: none; }
+
+.adv-icon {
+  width: 40px;
+  height: 2px;
+  background: var(--red);
+  margin-bottom: 28px;
+}
+
+.adv-val {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.adv-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 18px;
+}
+
+.adv-desc {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ─── PROCESS ─── */
+#process { background: var(--white); }
+
+.process-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.process-timeline::before {
+  content: '';
+  position: absolute;
+  left: 199px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+
+.p-step {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+  padding: 36px 0;
+  position: relative;
+  cursor: default;
+  transition: background 0.25s;
+}
+.p-step:last-child { border-bottom: 1px solid var(--line); }
+.p-step:hover { background: var(--gray-10); }
+
+.p-step::before {
+  content: '';
+  position: absolute;
+  left: 196px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background 0.3s;
+  z-index: 1;
+}
+.p-step:hover::before { background: var(--red); }
+
+.p-left {
+  padding-right: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0;
+}
+
+.p-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.p-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--black);
+  letter-spacing: 0.02em;
+}
+
+.p-right {
+  padding-left: 52px;
+  display: flex;
+  align-items: center;
+}
+
+.p-desc {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--gray-60);
+  max-width: 640px;
+}
+
+/* ─── CONTACTS ─── */
+#contacts { background: var(--gray-10); padding-bottom: 0; }
+
+.contacts-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.contacts-info {
+  padding: 64px 64px 64px 0;
+  border-right: 1px solid var(--line);
+}
+
+.contact-block {
+  margin-bottom: 40px;
+}
+.contact-lbl {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.contact-lbl::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.contact-val {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--black);
+}
+
+.contacts-form-wrap {
+  padding: 64px 0 64px 64px;
+}
+
+.contacts-form-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--black);
+  margin-bottom: 32px;
+}
+
+.form { display: flex; flex-direction: column; gap: 0; }
+
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+
+.f-group {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-right: none;
+  transition: border-color 0.25s;
+}
+.f-group:focus-within { border-color: var(--black); z-index: 1; }
+
+.f-row .f-group { border-right: none; }
+.f-row .f-group:last-child { border-right: 1px solid var(--line); }
+.f-row .f-group:first-child { border-right: none; }
+
+.f-single { border-right: 1px solid var(--line); }
+
+.f-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray-30);
+  padding: 14px 20px 0;
+}
+
+.f-input, .f-select, .f-textarea {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: var(--black);
+  padding: 8px 20px 14px;
+  width: 100%;
+}
+
+.f-select { appearance: none; cursor: pointer; }
+.f-select option { background: var(--white); }
+.f-input::placeholder, .f-textarea::placeholder { color: var(--gray-30); }
+
+.f-textarea-wrap {
+  border: 1px solid var(--line);
+  border-top: none;
+  border-right: 1px solid var(--line);
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s;
+}
+.f-textarea-wrap:focus-within { border-color: var(--black); }
+.f-textarea { resize: none; height: 100px; }
+
+.f-submit-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  border: 1px solid var(--line);
+  border-top: none;
+}
+.f-note {
+  padding: 20px;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--gray-30);
+  display: flex;
+  align-items: center;
+}
+
+.f-btn {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0 40px;
+  cursor: pointer;
+  transition: background 0.25s;
+  white-space: nowrap;
+}
+.f-btn:hover { background: #a02d22; }
+
+/* ─── MAP STRIP ─── */
+.map-strip {
+  background: var(--black);
+  padding: 32px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.map-addr {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.35);
+}
+.map-link {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(192,57,43,0.4);
+  padding-bottom: 2px;
+  transition: border-color 0.25s;
+}
+.map-link:hover { border-color: var(--red); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 0 64px;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 60px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+}
+.footer-logo span { color: var(--red); }
+
+.footer-copy {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.18);
+  text-align: center;
+}
+
+.footer-right {
+  text-align: right;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.18);
+}
+
+/* ─── FORM SUCCESS ─── */
+.form-success-msg {
+  display: none;
+  padding: 48px 0;
+  text-align: center;
+}
+.form-success-msg h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 14px;
+}
+.form-success-msg p { font-size: 0.9rem; line-height: 1.75; color: var(--gray-60); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── MOBILE ─── */
+@media (max-width: 1024px) {
+  .container { padding: 0 28px; }
+  .nav-inner { padding: 0 28px; }
+  .nav-links { display: none; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 48px 28px; }
+  .hero-right { display: none; }
+  .sec { padding: 64px 0; }
+  .sec-header { grid-template-columns: 1fr; gap: 20px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .services-list { grid-template-columns: 1fr; }
+  .srv { border-right: none !important; }
+  .case-row { grid-template-columns: 1fr; direction: ltr !important; }
+  .case-row.reverse .case-info { border-right: none; border-top: 1px solid var(--line); }
+  .case-info { border-left: none !important; border-top: 1px solid var(--line); padding: 32px 28px; }
+  .adv-grid { grid-template-columns: 1fr; }
+  .adv-card { border-right: none !important; }
+  .process-timeline::before { display: none; }
+  .p-step { grid-template-columns: 1fr; gap: 8px; }
+  .p-step::before { display: none; }
+  .p-right { padding-left: 0; }
+  .contacts-top { grid-template-columns: 1fr; }
+  .contacts-info { padding: 48px 28px; border-right: none; border-bottom: 1px solid var(--line); }
+  .contacts-form-wrap { padding: 48px 28px; }
+  .f-row { grid-template-columns: 1fr; }
+  .f-row .f-group:last-child { border-right: none; border-left: none; border-right: none; }
+  .f-single { border-right: none; }
+  .f-submit-row { grid-template-columns: 1fr; }
+  .f-btn { padding: 18px; }
+  .map-strip { padding: 24px 28px; flex-direction: column; gap: 12px; text-align: center; }
+  footer { padding: 0 28px; }
+  .footer-inner { grid-template-columns: 1fr; height: auto; padding: 20px 0; gap: 8px; text-align: center; }
+  .footer-right { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <span class="logo-mark">АРС<span>.</span></span>
+      <span class="logo-sep"></span>
+      <span class="logo-sub">Архитектурная реставрационная служба</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">О компании</a></li>
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#cases">Объекты</a></li>
+      <li><a href="#process">Этапы</a></li>
+      <li class="nav-cta-wrap"><a href="#contacts" class="nav-cta">Оставить заявку</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Санкт-Петербург — с 2002 года</span>
+      </div>
+      <h1 class="hero-title">
+        Рестав&shy;рация<br>
+        <span class="italic">истори&shy;ческих</span><br>
+        зданий<span class="accent">.</span>
+      </h1>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-desc">
+        Комплексные работы по сохранению и восстановлению объектов культурного наследия. Строгое соблюдение охранных регламентов, авторский надзор, ответственность за результат на каждом этапе.
+      </p>
+      <div class="hero-actions">
+        <a href="#contacts" class="btn-red">Обсудить проект</a>
+        <a href="#cases" class="btn-outline">Смотреть объекты</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <!-- ВИЗУАЛ: вертикальный кадр исторического фасада в процессе реставрации -->
+      <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?w=1000&q=80" alt="Реставрация исторического здания">
+    </div>
+    <div class="hero-stats-row">
+      <div class="stat-block">
+        <div class="stat-n">80<em>+</em></div>
+        <div class="stat-l">объектов завершено</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-n">22</div>
+        <div class="stat-l">года на рынке</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-n">5<em>л</em></div>
+        <div class="stat-l">гарантия на работы</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-num">01 — О компании</span>
+      <h2 class="sec-title">Более двух десятилетий<br><em>в реставрации Петербурга</em></h2>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>Архитектурная реставрационная служба работает в Санкт-Петербурге с 2002 года. За это время мы завершили более 80 объектов — жилых доходных домов, административных зданий, объектов культурного наследия федерального и регионального значения.</p>
+        <p>Наш профиль — <strong>здания дореволюционной и советской постройки</strong>, требующие технически сложных и методологически выверенных решений. Мы работаем в плотном взаимодействии с КГИОП, располагаем собственным реставрационным отделом и производственной базой.</p>
+        <p>Ключевые заказчики — девелоперы, управляющие компании, КУГИ, государственные учреждения культуры. Мы не участвуем в случайных тендерах: каждый проект проходит через предварительный аудит и экспертную оценку состояния объекта.</p>
+        <div class="about-photo">
+          <!-- ВИЗУАЛ: фото команды за работой или деталь восстановленного декора -->
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Производство реставрационных работ">
+          <p class="photo-caption">Производство фасадных работ. Ул. Жуковского, д. 37, 2022 г.</p>
+        </div>
+      </div>
+      <div class="about-sidebar">
+        <div class="cert-row">
+          <span class="cert-idx">I</span>
+          <div>
+            <p class="cert-name">Лицензия Минкультуры РФ</p>
+            <p class="cert-desc">На осуществление деятельности по сохранению объектов культурного наследия: реставрация, консервация, воссоздание. Лицензия предоставлена бессрочно.</p>
+          </div>
+        </div>
+        <div class="cert-row">
+          <span class="cert-idx">II</span>
+          <div>
+            <p class="cert-name">Членство в СРО</p>
+            <p class="cert-desc">Допуск к работам по строительству, реконструкции, капитальному ремонту объектов капитального строительства. Взносы в компенсационный фонд выплачены в полном объёме.</p>
+          </div>
+        </div>
+        <div class="cert-row">
+          <span class="cert-idx">III</span>
+          <div>
+            <p class="cert-name">Аттестованные специалисты</p>
+            <p class="cert-desc">Реставраторы I–III категории, архитекторы с профильным образованием и опытом работы на охраняемых объектах. Регулярное повышение квалификации.</p>
+          </div>
+        </div>
+        <div class="cert-row">
+          <span class="cert-idx">IV</span>
+          <div>
+            <p class="cert-name">Страхование ответственности</p>
+            <p class="cert-desc">Гражданская ответственность застрахована. Заказчик защищён от финансовых рисков, связанных с производственными инцидентами и ущербом третьим лицам.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="sec">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-num">02 — Услуги</span>
+      <h2 class="sec-title">Полный цикл<br><em>реставрационных работ</em></h2>
+    </div>
+    <div class="services-list reveal">
+      <div class="srv">
+        <p class="srv-num">01</p>
+        <h3 class="srv-name">Реставрация фасадов</h3>
+        <p class="srv-desc">Расчистка и укрепление штукатурного слоя, воссоздание исторической лепнины и архитектурных деталей, окраска по колористическому паспорту. Работы с кирпичом, камнем, терразитом.</p>
+      </div>
+      <div class="srv">
+        <p class="srv-num">02</p>
+        <h3 class="srv-name">Интерьерная реставрация</h3>
+        <p class="srv-desc">Восстановление парадных лестниц и исторической отделки: лепной декор, наборный паркет, кованые ограждения, изразцовые печи, исторические двери и окна.</p>
+      </div>
+      <div class="srv">
+        <p class="srv-num">03</p>
+        <h3 class="srv-name">Инженерные системы</h3>
+        <p class="srv-desc">Замена инженерных коммуникаций (отопление, водоснабжение, электрика, вентиляция) с сохранением исторического облика здания. Полное согласование с контролирующими органами.</p>
+      </div>
+      <div class="srv">
+        <p class="srv-num">04</p>
+        <h3 class="srv-name">Кровля и конструктив</h3>
+        <p class="srv-desc">Капитальный ремонт кровельного покрытия, усиление несущих конструкций, гидроизоляция фундамента и цокольной части, работы с деревянными перекрытиями.</p>
+      </div>
+      <div class="srv">
+        <p class="srv-num">05</p>
+        <h3 class="srv-name">Проектирование и экспертиза</h3>
+        <p class="srv-desc">Разработка проектной и рабочей документации, историко-культурная экспертиза, технический аудит объекта, согласование в КГИОП и профильных структурах.</p>
+      </div>
+      <div class="srv">
+        <p class="srv-num">06</p>
+        <h3 class="srv-name">Технический надзор</h3>
+        <p class="srv-desc">Авторский и технический надзор за ходом работ, входной контроль материалов, исполнительная документация, взаимодействие с КГИОП в ходе реализации проекта.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="cases" class="sec">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-num">03 — Реализованные проекты</span>
+      <h2 class="sec-title">Объекты, которыми<br><em>мы гордимся</em></h2>
+    </div>
+    <div class="cases-list reveal">
+      <!-- Case 1 -->
+      <div class="case-row">
+        <div class="case-photo">
+          <!-- ВИЗУАЛ: фасад до/после или деталь восстановленного декора -->
+          <img src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=800&q=80" alt="Миллионная 20">
+        </div>
+        <div class="case-info">
+          <p class="case-addr">Ул. Миллионная, д. 20 — 2021</p>
+          <h3 class="case-title">Доходный дом Голицына. Комплексная реставрация объекта культурного наследия</h3>
+          <p class="case-desc">Полный цикл работ на объекте федерального значения: реставрация главного фасада с воссозданием утраченных элементов декора, восстановление исторической парадной лестницы, замена инженерных систем. Срок реализации — 26 месяцев. Заказчик — КУГИ Санкт-Петербурга.</p>
+          <div class="case-tags">
+            <span class="tag">ОКН федерального значения</span>
+            <span class="tag">Фасады</span>
+            <span class="tag">Интерьеры</span>
+            <span class="tag">Инженерия</span>
+          </div>
+        </div>
+      </div>
+      <!-- Case 2 -->
+      <div class="case-row reverse">
+        <div class="case-photo">
+          <!-- ВИЗУАЛ: до/после парадной лестницы -->
+          <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80" alt="Жуковского 37">
+        </div>
+        <div class="case-info">
+          <p class="case-addr">Ул. Жуковского, д. 37 — 2022</p>
+          <h3 class="case-title">Жилой дом рубежа XIX–XX вв. Реставрация фасада и парадных</h3>
+          <p class="case-desc">Реставрация двух главных фасадов с воссозданием лепнины по историческим образцам, восстановление двух парадных лестниц, ремонт кровли. Объект регионального значения. Заказчик — частный собственник здания.</p>
+          <div class="case-tags">
+            <span class="tag">ОКН регионального значения</span>
+            <span class="tag">Лепнина</span>
+            <span class="tag">Кровля</span>
+          </div>
+        </div>
+      </div>
+      <!-- Case 3 -->
+      <div class="case-row">
+        <div class="case-photo">
+          <!-- ВИЗУАЛ: архивное фото + современный вид -->
+          <img src="https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?w=800&q=80" alt="Фуражный пер. 4">
+        </div>
+        <div class="case-info">
+          <p class="case-addr">Фуражный пер., д. 4 — 2023</p>
+          <h3 class="case-title">Административное здание. Капитальный ремонт и реставрация</h3>
+          <p class="case-desc">Комплексные работы по капитальному ремонту с элементами реставрации: усиление несущих конструкций, реставрация фасадного декора, полная замена инженерных сетей. Заказчик — государственное учреждение.</p>
+          <div class="case-tags">
+            <span class="tag">Капремонт</span>
+            <span class="tag">Конструктив</span>
+            <span class="tag">Инженерия</span>
+          </div>
+        </div>
+      </div>
+      <!-- Case 4 -->
+      <div class="case-row reverse">
+        <div class="case-photo">
+          <!-- ВИЗУАЛ: панорамный вид объекта, процесс работ -->
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="6-я Советская 10">
+        </div>
+        <div class="case-info">
+          <p class="case-addr">6-я Советская ул., д. 10 — 2024</p>
+          <h3 class="case-title">Жилой дом 1910-х годов. Полный реставрационный цикл</h3>
+          <p class="case-desc">Масштабный проект в рамках программы капитального ремонта: реставрация дворового и уличного фасадов, восстановление трёх парадных, замена кровли, полная перекладка инженерных сетей. Особенность объекта — высокая плотность исторической отделки и деревянные перекрытия. Заказчик — управляющая компания.</p>
+          <div class="case-tags">
+            <span class="tag">Выявленный ОКН</span>
+            <span class="tag">Фасады</span>
+            <span class="tag">Парадные</span>
+            <span class="tag">Кровля</span>
+            <span class="tag">Инженерия</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section id="advantages" class="sec">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-num">04 — Почему выбирают нас</span>
+      <h2 class="sec-title">Репутация,<br><em>которая строится годами</em></h2>
+    </div>
+    <div class="adv-grid reveal">
+      <div class="adv-card">
+        <div class="adv-icon"></div>
+        <div class="adv-val">22+</div>
+        <div class="adv-title">Лет на рынке</div>
+        <p class="adv-desc">Устойчивая практика работы с объектами культурного наследия Петербурга. Репутация подкреплена завершёнными проектами, а не декларациями.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon"></div>
+        <div class="adv-val">100%</div>
+        <div class="adv-title">Сдача в срок</div>
+        <p class="adv-desc">За последние пять лет ни один объект не был сдан с задержкой более двух недель. Управление сроками — часть производственного регламента.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon"></div>
+        <div class="adv-val">КГИОП</div>
+        <div class="adv-title">Согласование</div>
+        <p class="adv-desc">Собственный отдел согласования, наработанные регламенты взаимодействия с ведомствами. Заказчик не занимается бюрократическими вопросами самостоятельно.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon"></div>
+        <div class="adv-val">5 лет</div>
+        <div class="adv-title">Гарантия</div>
+        <p class="adv-desc">Предоставляем гарантию на выполненные работы сроком 5 лет. По истечении готовы к долгосрочному обслуживанию объекта на условиях сервисного договора.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon"></div>
+        <div class="adv-val">Свои</div>
+        <div class="adv-title">Специалисты</div>
+        <p class="adv-desc">Реставраторы, архитекторы, инженеры — штатные сотрудники с профильной аттестацией. Работы не передаются субподрядчикам без ведома заказчика.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon"></div>
+        <div class="adv-val">Без</div>
+        <div class="adv-title">Скрытых расходов</div>
+        <p class="adv-desc">Детальная смета до начала работ. Все отклонения — только письменным дополнительным соглашением. Финансовая прозрачность на каждом этапе.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="sec">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-num">05 — Этапы работы</span>
+      <h2 class="sec-title">Как реализуется<br><em>каждый проект</em></h2>
+    </div>
+    <div class="process-timeline reveal">
+      <div class="p-step">
+        <div class="p-left">
+          <p class="p-num">Этап I</p>
+          <p class="p-name">Первичный аудит</p>
+        </div>
+        <div class="p-right">
+          <p class="p-desc">Выезд специалиста на объект, визуальное обследование, предварительная оценка объёма и сложности работ. Первичная консультация проводится бесплатно и без обязательств с вашей стороны.</p>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-left">
+          <p class="p-num">Этап II</p>
+          <p class="p-name">Техническое обследование</p>
+        </div>
+        <div class="p-right">
+          <p class="p-desc">Инструментальное обследование несущих конструкций и инженерных систем, архивные изыскания, историко-архивная справка, фотофиксация исходного состояния объекта.</p>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-left">
+          <p class="p-num">Этап III</p>
+          <p class="p-name">Проектирование</p>
+        </div>
+        <div class="p-right">
+          <p class="p-desc">Разработка проектной и рабочей документации. Согласование в КГИОП и иных надзорных органах при необходимости. Подготовка историко-культурной экспертизы.</p>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-left">
+          <p class="p-num">Этап IV</p>
+          <p class="p-name">Смета и договор</p>
+        </div>
+        <div class="p-right">
+          <p class="p-desc">Детальный расчёт стоимости по утверждённой проектной документации, согласование графика платежей, подписание договора с фиксацией сроков, объёма работ и гарантийных обязательств.</p>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-left">
+          <p class="p-num">Этап V</p>
+          <p class="p-name">Производство работ</p>
+        </div>
+        <div class="p-right">
+          <p class="p-desc">Выполнение реставрационных и строительных работ. Еженедельная отчётность для заказчика в согласованном формате. Авторский надзор архитектора на всём протяжении производства.</p>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-left">
+          <p class="p-num">Этап VI</p>
+          <p class="p-name">Сдача объекта</p>
+        </div>
+        <div class="p-right">
+          <p class="p-desc">Подготовка полного комплекта исполнительной документации, сдача объекта заказчику с подписанием актов. Гарантийное и постгарантийное сопровождение по запросу.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts" class="sec" style="padding-bottom:0;border-bottom:none">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-num">06 — Контакты</span>
+      <h2 class="sec-title">Обсудим<br><em>ваш объект</em></h2>
+    </div>
+    <div class="contacts-top reveal">
+      <div class="contacts-info">
+        <p style="font-size:0.9rem;line-height:1.85;color:var(--gray-60);margin-bottom:40px;max-width:400px">
+          Оставьте заявку или свяжитесь с нами напрямую. Первичная консультация и выезд специалиста для предварительной оценки объекта — бесплатно.
+        </p>
+        <div class="contact-block">
+          <p class="contact-lbl">Адрес офиса</p>
+          <p class="contact-val">Санкт-Петербург<br>ул. Рылеева, д. 12, оф. 301</p>
+        </div>
+        <div class="contact-block">
+          <p class="contact-lbl">Телефон</p>
+          <p class="contact-val">+7 (812) 318-44-00</p>
+        </div>
+        <div class="contact-block">
+          <p class="contact-lbl">Электронная почта</p>
+          <p class="contact-val">info@ars-spb.ru</p>
+        </div>
+        <div class="contact-block">
+          <p class="contact-lbl">Режим работы</p>
+          <p class="contact-val">Понедельник–пятница<br>9:00–18:00</p>
+        </div>
+      </div>
+
+      <div class="contacts-form-wrap">
+        <p class="contacts-form-title">Заявка на сотрудничество</p>
+        <form class="form" id="contactForm">
+          <div class="f-single f-group">
+            <label class="f-label">Организация</label>
+            <input class="f-input" type="text" placeholder="Наименование юридического лица">
+          </div>
+          <div class="f-row">
+            <div class="f-group">
+              <label class="f-label">Контактное лицо</label>
+              <input class="f-input" type="text" placeholder="Фамилия, имя">
+            </div>
+            <div class="f-group" style="border-left:none;border-right:1px solid var(--line)">
+              <label class="f-label">Телефон</label>
+              <input class="f-input" type="tel" placeholder="+7 (___) ___-__-__">
+            </div>
+          </div>
+          <div class="f-single f-group">
+            <label class="f-label">Адрес объекта</label>
+            <input class="f-input" type="text" placeholder="Санкт-Петербург, ул. ...">
+          </div>
+          <div class="f-single f-group">
+            <label class="f-label">Тип работ</label>
+            <select class="f-select f-input">
+              <option value="" disabled selected>Выберите направление</option>
+              <option>Реставрация фасадов</option>
+              <option>Интерьерная реставрация</option>
+              <option>Капитальный ремонт</option>
+              <option>Проектирование и экспертиза</option>
+              <option>Технический надзор</option>
+              <option>Комплексный проект</option>
+            </select>
+          </div>
+          <div class="f-textarea-wrap f-single">
+            <label class="f-label" style="padding:14px 20px 0">Комментарий</label>
+            <textarea class="f-textarea f-input" placeholder="Кратко опишите объект, его статус охраны и предполагаемый объём работ"></textarea>
+          </div>
+          <div class="f-submit-row">
+            <p class="f-note">Направляя заявку, вы соглашаетесь с обработкой персональных данных в соответствии с ФЗ-152. Данные не передаются третьим лицам.</p>
+            <button type="submit" class="f-btn">Отправить заявку</button>
+          </div>
+        </form>
+        <div class="form-success-msg" id="formSuccess">
+          <h3>Заявка принята</h3>
+          <p>Мы свяжемся с вами в течение одного рабочего дня для уточнения деталей и согласования времени первичного выезда.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="map-strip">
+    <span class="map-addr">Санкт-Петербург, ул. Рылеева, д. 12 — ст. м. Чернышевская, 5 мин пешком</span>
+    <a href="#contacts" class="map-link">Проложить маршрут</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner container" style="padding:0">
+    <a href="#hero" class="footer-logo">АРС<span>.</span></a>
+    <span class="footer-copy">© 2002–2024 Архитектурная реставрационная служба. Все права защищены.</span>
+    <span class="footer-right">Санкт-Петербург</span>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Reveal
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 70);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => obs.observe(el));
+
+// Form
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>

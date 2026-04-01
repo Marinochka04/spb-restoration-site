@@ -1,0 +1,97 @@
+/* ─── CONTACTS ─── */
+#contacts {
+  background: var(--warm-dark);
+  padding: 100px 80px;
+}
+.contacts-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+}
+#contacts .section-title { color: #fff; }
+#contacts .section-tag { color: var(--gold); }
+ 
+.contact-intro {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.42);
+  margin-top: 28px;
+  font-weight: 300;
+}
+.contact-details {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.contact-item-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.contact-item-val {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.6;
+  font-weight: 300;
+}
+ 
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+}
+.form-input, .form-select, .form-textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 300;
+  padding: 14px 18px;
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: rgba(184,154,94,0.5);
+}
+.form-select { appearance: none; cursor: pointer; }
+.form-select option { background: var(--warm-dark); }
+.form-textarea { resize: none; height: 100px; }
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+ 
+.form-submit {
+  background: var(--gold);
+  color: var(--warm-dark);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.35s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: transparent; color: var(--gold); }
+.form-note {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.22);
+  line-height: 1.65;
+  font-weight: 300;
+}
