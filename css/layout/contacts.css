@@ -19,9 +19,9 @@
       rgba(20,18,16,0.6) 45%,
       rgba(20,18,16,0.95) 75%
     ),
-    url("../../images/spb-background1.webp") right center / cover no-repeat;
+    url("../../images/spb-background4.jpg") right center / cover no-repeat;
 
-  opacity: 0.18;
+  opacity: 0.22;
 
   pointer-events: none;
 }
@@ -32,6 +32,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 100px;
+  position: relative;
+  z-index: 1;
 }
 #contacts .section-title { color: #fff; }
 #contacts .section-tag { color: var(--gold); }
