@@ -53,28 +53,3 @@
   color: rgba(255,255,255,0.7);
   text-transform: uppercase;
 }
- 
-.about-cert { display: flex; align-items: flex-start; gap: 16px; }
-.cert-icon {
-  width: 12px;
-  height: 12px;
-  background: var(--gold);
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  margin-top: 6px;
-}
-
-.cert-text {
-  font-size: 0.85rem;
-  line-height: 1.65;
-  color: var(--text-muted);
-  font-weight: 300;
-}
-.cert-text strong {
-  display: block;
-  color: var(--text-main);
-  font-weight: 500;
-  margin-bottom: 4px;
-  font-size: 0.75rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}

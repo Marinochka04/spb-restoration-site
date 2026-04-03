@@ -24,14 +24,6 @@
   line-height: 1;
   margin-bottom: 12px;
 }
-.adv-title {
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-main);
-  margin-bottom: 10px;
-}
 .adv-text {
   font-size: 0.87rem;
   line-height: 1.8;

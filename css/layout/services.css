@@ -14,13 +14,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-.services-intro {
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.4);
-  max-width: 360px;
-  font-weight: 300;
-}
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
