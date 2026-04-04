@@ -6,23 +6,425 @@
   #hero { padding: 0; }
   .hero-content { padding: 0 32px 72px; }
   .hero-stats { display: none; }
+
+  .bridge {
+    padding: 0 24px 48px;
+  }
+
+  .bridge-inner {
+    grid-template-columns: 1fr;
+    border: 1px solid var(--stone-mid);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .bridge-stat {
+    border-right: none;
+    border-bottom: 1px solid var(--stone-mid);
+    padding: 28px 32px;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .bridge-stat:last-child {
+    border-bottom: none;
+  }
+
+  .bridge-n {
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .bridge-divider {
+    flex-shrink: 0;
+  }
+
+  .bridge-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+
   .scroll-line { left: 32px; }
   .about-inner { grid-template-columns: 1fr; }
   .about-left, .about-right { padding: 48px 32px; }
   .about-right { padding-top: 0; }
+  .about-visual {
+    max-width: 650px;
+    margin: 0 auto 16px;
+  }
   #services { padding: 72px 32px; }
   .services-header { flex-direction: column; align-items: flex-start; gap: 24px; margin-bottom: 40px; }
-  .services-grid { grid-template-columns: 1fr; }
+  .services-grid {
+    gap: 12px;
+    background: none;
+    border: none;
+  }
+
+  .service-card {
+    border: 1px solid rgba(184,154,94,0.1);
+  }
+
   #cases { padding: 72px 32px; }
   .cases-grid { grid-template-columns: 1fr; }
   .case-card:first-child { grid-column: auto; }
-  .adv-inner { grid-template-columns: 1fr; gap: 40px; }
-  #advantages { padding: 72px 32px; }
-  .adv-grid { grid-template-columns: 1fr; gap: 36px; }
-  .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
-  .process-steps::before { display: none; }
-  #process { padding: 72px 32px; }
-  .contacts-inner { grid-template-columns: 1fr; gap: 56px; }
-  #contacts { padding: 72px 32px; }
+  
+  #advantages {
+    padding: 72px 32px;
+  }
+
+  .adv-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  /* левая часть — центрируем и ограничиваем ширину */
+  .adv-left {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .adv-left .divider {
+    margin: 16px auto;
+  }
+
+  /* сетка преимуществ */
+  .adv-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 24px;
+  }
+
+  /* карточки */
+  .adv-item {
+    padding: 20px 18px;
+    border: 1px solid rgba(184,154,94,0.08);
+    background: #fff;
+  }
+
+  /* номер/заголовок */
+  .adv-num {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+
+  /* текст */
+  .adv-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+  #process {
+    padding: 72px 32px;
+  }
+
+  .process-header {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    position: relative;
+  }
+
+  /* убираем горизонтальную линию */
+  .process-steps::before {
+    display: none;
+  }
+
+  /* шаги превращаем в строки */
+  .step {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 0;
+  }
+
+  /* кружок */
+  .step-dot {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  /* номер */
+  .step-num {
+    font-size: 0.95rem;
+  }
+
+  /* текстовая часть */
+  .step-title {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+
+  .step-text {
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+    /* ─── APPLE STYLE PROCESS ─── */
+
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    position: relative;
+    padding-left: 18px;
+  }
+
+  /* вертикальная линия слева */
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 22px;
+    width: 1px;
+    background: rgba(184,154,94,0.25);
+  }
+
+  /* карточка шага */
+  .step {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 14px;
+
+    padding: 18px 18px;
+    position: relative;
+
+    transition: all 0.35s ease;
+  }
+
+  /* hover (как Apple — лёгкий lift) */
+  .step:hover {
+    transform: translateY(-2px);
+    border-color: rgba(184,154,94,0.35);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  }
+
+  /* кружок-номер */
+  .step-dot {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    background: #fff;
+    border: 1px solid rgba(184,154,94,0.3);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* активный эффект */
+  .step:hover .step-dot {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  /* номер */
+  .step-num {
+    font-size: 0.9rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--text-main);
+  }
+
+  .step:hover .step-num {
+    color: var(--warm-dark);
+  }
+
+  /* контент */
+  .step-title {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .step-text {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* убираем старую сеточную логику */
+  .process-steps::before {
+    z-index: 0;
+  }
+  #contacts {
+    padding: 80px 40px;
+  }
+
+  .contacts-inner {
+    gap: 60px;
+  }
   footer { padding: 24px 32px; flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media (max-width: 768px) {
+  .adv-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .adv-left {
+    text-align: left;
+  }
+
+  .adv-left .divider {
+    margin: 16px 0;
+  }
+
+  .process-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .step {
+    gap: 14px;
+  }
+
+  .step-dot {
+    width: 40px;
+    height: 40px;
+  }
+
+  .step-title {
+    font-size: 0.78rem;
+  }
+
+  .step-text {
+    font-size: 0.8rem;
+  }
+
+  .process-steps {
+    padding-left: 14px;
+  }
+
+  .process-steps::before {
+    left: 20px;
+  }
+
+  .step {
+    padding: 16px;
+  }
+
+  .step-dot {
+    width: 38px;
+    height: 38px;
+  }
+
+  .step-title {
+    font-size: 0.8rem;
+  }
+
+  .step-text {
+    font-size: 0.8rem;
+  }
+
+  #contacts {
+    padding: 70px 24px;
+  }
+
+  .contacts-inner {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .contact-intro {
+    font-size: 0.95rem;
+    margin-top: 18px;
+  }
+
+  .contact-details {
+    margin-top: 32px;
+    gap: 18px;
+  }
+
+  .contact-item-val {
+    font-size: 0.95rem;
+  }
+
+  /* форма становится компактнее */
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 0.9rem;
+    padding: 12px 14px;
+  }
+
+  .form-textarea {
+    height: 90px;
+  }
+
+  .form-submit {
+    font-size: 0.7rem;
+    padding: 14px;
+  }
+
+  .form-note {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #contacts {
+    padding: 60px 18px;
+  }
+
+  .contact-intro {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .contact-details {
+    gap: 16px;
+  }
+
+  .contact-item-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+  }
+
+  .contact-item-val {
+    font-size: 0.9rem;
+  }
+
+  .form-group {
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 0.58rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 0.88rem;
+    padding: 12px;
+  }
+
+  .form-textarea {
+    height: 80px;
+  }
+
+  .form-submit {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+  }
+
+  .form-note {
+    font-size: 0.62rem;
+  }
 }
