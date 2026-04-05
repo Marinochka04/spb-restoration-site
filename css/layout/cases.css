@@ -24,6 +24,7 @@
   overflow: hidden;
   background: #fff;
   transition: background 0.3s;
+  align-items: stretch;
 }
 .case-row:last-child { border-bottom: 1px solid var(--stone-mid); }
 .case-row:hover { background: var(--stone); }
@@ -33,7 +34,7 @@
 .case-photo {
   overflow: hidden;
   position: relative;
-  height: 420px;
+  height: 100%;
 }
 .case-photo img {
   width: 100%;
@@ -42,6 +43,8 @@
   display: block;
   filter: grayscale(25%);
   transition: transform 0.8s ease, filter 0.5s;
+  position: absolute;
+  inset: 0;
 }
 .case-row:hover .case-photo img {
   transform: scale(1.04);
