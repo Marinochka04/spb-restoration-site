@@ -1,5 +1,15 @@
 /* ─── MOBILE ─── */
 @media (max-width: 1024px) {
+  section { padding: 52px 32px; }
+  #about { padding: 52px 0; }
+  .about-left, .about-right { padding: 36px 32px; }
+  .about-right { padding-top: 0; }
+  #services { padding: 52px 32px; }
+  #cases { padding: 52px 32px; }
+  #advantages { padding: 52px 32px; }
+  #process { padding: 52px 32px; }
+  #contacts { padding: 52px 32px; }
+  
   .nav-links { display: none !important; }
   .nav-cta { display: none; }
   .burger { display: flex; }
@@ -75,9 +85,11 @@
   .about-left, .about-right { padding: 48px 32px; }
   .about-right { padding-top: 0; }
   .about-visual {
-    max-width: 650px;
+    aspect-ratio: 4/3;
     margin: 0 auto 16px;
+    max-width: 600px;
   }
+ 
   #services { padding: 72px 32px; }
   .services-header { flex-direction: column; align-items: flex-start; gap: 24px; margin-bottom: 40px; }
   .services-grid {
@@ -296,6 +308,38 @@
 }
 
 @media (max-width: 768px) {
+  /* SERVICES — 2 колонки на планшетах/мобиле */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* карточки делаем компактнее */
+  .service-card {
+    padding: 24px 20px;
+  }
+
+  /* чуть уменьшаем текст */
+  .service-name {
+    font-size: 1.05rem;
+  }
+
+  .service-desc {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  /* номер тоже чуть уменьшаем */
+  .service-num {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+
+  /* линия компактнее */
+  .service-line {
+    margin-bottom: 14px;
+  }
+
   .adv-grid {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -402,6 +446,10 @@
 }
 
 @media (max-width: 480px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
   #contacts {
     padding: 60px 18px;
   }
