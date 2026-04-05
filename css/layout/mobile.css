@@ -1,7 +1,31 @@
 /* ─── MOBILE ─── */
 @media (max-width: 1024px) {
-  nav { padding: 18px 32px; }
-  .nav-links { display: none; }
+  .nav-links { display: none !important; }
+  .nav-cta { display: none; }
+  .burger { display: flex; }
+
+  #hero {
+    align-items: center;
+  }
+
+  .hero-content {
+    padding: 100px 24px 80px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 8vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .hero-sub {
+    font-size: 0.9rem;
+    margin-bottom: 36px;
+  }
+
+  .hero-line {
+    display: none;
+  }
+
   section { padding: 72px 32px; }
   #hero { padding: 0; }
   .hero-content { padding: 0 32px 72px; }
