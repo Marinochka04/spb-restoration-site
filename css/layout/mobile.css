@@ -181,7 +181,7 @@
   .step {
     display: flex;
     gap: 20px;
-    align-items: flex-start;
+    align-items: center;
     padding: 20px 0 20px 0;
     border-bottom: 1px solid var(--stone-mid);
     border-radius: 0;
@@ -235,7 +235,6 @@
 
   .step-body {
     flex: 1;
-    padding-top: 10px;
   }
 
   .step-title {
