@@ -138,11 +138,6 @@
   .adv-left {
     max-width: 700px;
     margin: 0 auto;
-    text-align: center;
-  }
-
-  .adv-left .divider {
-    margin: 16px auto;
   }
 
   /* сетка преимуществ */
@@ -175,7 +170,6 @@
 
   .process-header {
     margin-bottom: 40px;
-    text-align: center;
   }
 
   .process-steps {
