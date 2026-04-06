@@ -345,7 +345,7 @@
   /* фото сверху */
   .case-photo {
     position: relative;
-    height: 220px;
+    height: 280px;
   }
 
   .case-photo img {
@@ -384,6 +384,10 @@
   .case-tag {
     font-size: 0.58rem;
     padding: 4px 10px;
+  }
+
+  .cases-list {
+    gap: 16px; /* или 20px */
   }
 
   .adv-grid {
