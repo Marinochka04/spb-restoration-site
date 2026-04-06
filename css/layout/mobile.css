@@ -473,6 +473,29 @@
     font-size: 0.95rem;
   }
 
+  .contacts-inner > div:first-child {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  #contacts .section-title,
+  #contacts .section-tag,
+  #contacts .divider {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .contact-details {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-item {
+    text-align: center;
+  }
+
   /* форма становится компактнее */
   .form-input,
   .form-select,
