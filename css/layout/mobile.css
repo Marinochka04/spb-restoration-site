@@ -276,7 +276,13 @@
 }
 
 @media (max-width: 768px) {
-  
+  nav {
+    padding: 16px 20px;
+  }
+
+  nav.scrolled {
+    padding: 12px 20px;
+  }
   .hero-bg {
     background:
       linear-gradient(
@@ -294,6 +300,17 @@
       ),
       url('../../images/hero2.jpg') center/cover no-repeat;
   }
+
+  #hero::after {
+    height: 100px; /* можно чуть меньше */
+    clip-path: polygon(0 100%, 100% 70%, 100% 100%);
+  }
+
+  #hero::before {
+    height: 60px;
+    clip-path: polygon(0 75%, 100% 100%, 0 100%);
+  }
+  
   /* SERVICES — 2 колонки на планшетах/мобиле */
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
