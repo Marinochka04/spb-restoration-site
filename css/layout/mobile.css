@@ -282,6 +282,24 @@
 }
 
 @media (max-width: 768px) {
+  
+  .hero-bg {
+    background:
+      linear-gradient(
+        to top,
+        rgba(30,24,16,0.8) 0%,
+        rgba(30,24,16,0.55) 25%,
+        rgba(30,24,16,0.4) 50%,
+        rgba(30, 24, 16, 0) 65%
+      ),
+      linear-gradient(
+        to right,
+        rgba(24,19,13,0.6) 0%,
+        rgba(24,19,13,0.4) 35%,
+        transparent 65%
+      ),
+      url('../../images/hero2.jpg') center/cover no-repeat;
+  }
   /* SERVICES — 2 колонки на планшетах/мобиле */
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
