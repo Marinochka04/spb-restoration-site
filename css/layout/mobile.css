@@ -161,141 +161,97 @@
 
   .process-steps {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 0;
     position: relative;
+    padding-left: 0;
   }
 
-  /* убираем горизонтальную линию */
-  .process-steps::before {
-    display: none;
-  }
-
-  /* шаги превращаем в строки */
-  .step {
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
-    padding: 0;
-  }
-
-  /* кружок */
-  .step-dot {
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
-    margin-bottom: 0;
-  }
-
-  /* номер */
-  .step-num {
-    font-size: 0.95rem;
-  }
-
-  /* текстовая часть */
-  .step-title {
-    font-size: 0.8rem;
-    margin-bottom: 6px;
-  }
-
-  .step-text {
-    font-size: 0.82rem;
-    line-height: 1.6;
-  }
-
-    /* ─── APPLE STYLE PROCESS ─── */
-
-  .process-steps {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    position: relative;
-    padding-left: 18px;
-  }
-
-  /* вертикальная линия слева */
+  /* вертикальная линия слева от точек */
   .process-steps::before {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 22px;
+    left: 21px;
     width: 1px;
-    background: rgba(184,154,94,0.25);
+    background: var(--stone-mid);
+    z-index: 0;
   }
 
-  /* карточка шага */
   .step {
     display: flex;
-    gap: 18px;
+    gap: 20px;
     align-items: flex-start;
-
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.06);
-    border-radius: 14px;
-
-    padding: 18px 18px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid var(--stone-mid);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    transition: border-color 0.3s;
     position: relative;
-
-    transition: all 0.35s ease;
   }
 
-  /* hover (как Apple — лёгкий lift) */
+  .step:last-child {
+    border-bottom: none;
+  }
+
   .step:hover {
-    transform: translateY(-2px);
-    border-color: rgba(184,154,94,0.35);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    transform: none;
+    box-shadow: none;
+    border-bottom-color: var(--gold);
   }
 
-  /* кружок-номер */
   .step-dot {
     width: 42px;
     height: 42px;
-    border-radius: 50%;
-
+    border-radius: 0;
     background: #fff;
-    border: 1px solid rgba(184,154,94,0.3);
-
+    border: 1px solid var(--stone-mid);
     display: flex;
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
     position: relative;
     z-index: 2;
+    transition: all 0.3s;
   }
 
-  /* активный эффект */
   .step:hover .step-dot {
-    background: var(--gold);
     border-color: var(--gold);
+    background: var(--gold);
   }
 
-  /* номер */
   .step-num {
     font-size: 0.9rem;
     font-family: 'Playfair Display', serif;
     color: var(--text-main);
+    transition: color 0.3s;
   }
 
   .step:hover .step-num {
     color: var(--warm-dark);
   }
 
-  /* контент */
+  .step-body {
+    flex: 1;
+    padding-top: 10px;
+  }
+
   .step-title {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-main);
     margin-bottom: 6px;
-    letter-spacing: 0.04em;
   }
 
   .step-text {
     font-size: 0.82rem;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--text-muted);
-  }
-
-  /* убираем старую сеточную логику */
-  .process-steps::before {
-    z-index: 0;
+    font-weight: 300;
   }
   #contacts {
     padding: 80px 40px;
@@ -338,6 +294,60 @@
   /* линия компактнее */
   .service-line {
     margin-bottom: 14px;
+  }
+
+  .case-row {
+    grid-template-columns: 1fr;
+    border-bottom: 1px solid var(--stone-mid);
+  }
+
+  /* убираем реверс */
+  .case-row.reverse {
+    direction: ltr;
+  }
+
+  /* фото сверху */
+  .case-photo {
+    position: relative;
+    height: 220px;
+  }
+
+  .case-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* текст снизу */
+  .case-info {
+    padding: 28px 24px;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid var(--stone-mid);
+  }
+
+  /* типографика компактнее */
+  .case-title {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  .case-desc {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  /* теги аккуратнее */
+  .case-tags {
+    gap: 6px;
+  }
+
+  .case-tag {
+    font-size: 0.58rem;
+    padding: 4px 10px;
   }
 
   .adv-grid {
