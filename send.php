@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type = $_POST['type'];
     $comment = $_POST['comment'];
 
-    $to = "marina-potapova04@mail.ru";
+    $to = "urban.reconstruction.center@gmail.com";
     $subject = "Новая заявка с сайта";
 
     $message = "
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Комментарий: $comment
     ";
 
-    $headers = "From: no-reply@" . $_SERVER['HTTP_HOST'] . "\r\n";
+    $headers = "From: no-reply@urban-reconstruction.su\r\n";
 
     mail($to, $subject, $message, $headers);
 
