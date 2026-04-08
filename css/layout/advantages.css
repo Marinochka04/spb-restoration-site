@@ -1,8 +1,8 @@
-/* ─── ADVANTAGES ─── */
 #advantages {
   background: #fff;
   padding: 100px 80px;
 }
+
 .adv-inner {
   max-width: 1120px;
   margin: 0 auto;
@@ -11,11 +11,13 @@
   gap: 80px;
   align-items: start;
 }
+
 .adv-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px 60px;
 }
+
 .adv-num {
   font-family: 'Playfair Display', serif;
   font-size: 1.9rem;
@@ -24,9 +26,62 @@
   line-height: 1;
   margin-bottom: 12px;
 }
+
 .adv-text {
   font-size: 0.87rem;
   line-height: 1.8;
   color: var(--text-muted);
   font-weight: 300;
+}
+
+@media (max-width: 1024px) {
+  #advantages {
+    padding:52px 32px;
+  }
+
+  .adv-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .adv-left {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .adv-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 24px;
+  }
+
+  .adv-item {
+    padding: 20px 18px;
+    border: 1px solid rgba(184,154,94,0.08);
+    background: #fff;
+  }
+
+  .adv-num {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+
+  .adv-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 768px) {
+  .adv-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .adv-left {
+    text-align: left;
+  }
+
+  .adv-left .divider {
+    margin: 16px 0;
+  }
 }

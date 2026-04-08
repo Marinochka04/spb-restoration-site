@@ -1,8 +1,6 @@
-/* ─── CONTACTS ─── */
 #contacts {
   background: var(--warm-dark);
   padding: 100px 80px;
-
   position: relative;
   overflow: hidden;
 }
@@ -35,8 +33,14 @@
   position: relative;
   z-index: 1;
 }
-#contacts .section-title { color: #fff; }
-#contacts .section-tag { color: var(--gold); }
+
+#contacts .section-title { 
+  color: #fff; 
+}
+
+#contacts .section-tag { 
+  color: var(--gold); 
+}
  
 .contact-intro {
   font-size: 1rem;
@@ -45,12 +49,14 @@
   margin-top: 28px;
   font-weight: 300;
 }
+
 .contact-details {
   margin-top: 48px;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
+
 .contact-item-label {
   font-size: 0.62rem;
   font-weight: 500;
@@ -59,6 +65,7 @@
   color: var(--gold);
   margin-bottom: 8px;
 }
+
 .contact-item-val {
   font-size: 1rem;
   color: rgba(255,255,255,0.72);
@@ -71,7 +78,11 @@
   flex-direction: column;
   gap: 16px;
 }
-.form-group { display: flex; flex-direction: column; gap: 8px; }
+
+.form-group { 
+  display: flex; flex-direction: column; gap: 8px; 
+}
+
 .form-label {
   font-size: 0.62rem;
   font-weight: 500;
@@ -79,6 +90,7 @@
   text-transform: uppercase;
   color: rgba(255,255,255,0.48);
 }
+
 .form-input, .form-select, .form-textarea {
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.2);
@@ -91,21 +103,37 @@
   transition: border-color 0.3s;
   width: 100%;
 }
+
 .form-input:focus, .form-select:focus, .form-textarea:focus {
   border-color: rgba(184,154,94,0.5);
 }
+
 .form-select option:checked {
   background: var(--gold);
   color: #000;
 }
+
 .form-select option:hover {
   background: var(--gold);
 }
 
-.form-select { appearance: none; cursor: pointer; }
-.form-select option { background: var(--warm-dark); }
-.form-textarea { resize: none; height: 100px; }
-.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.3); }
+.form-select { 
+  appearance: none; 
+  cursor: pointer; 
+}
+
+.form-select option { 
+  background: var(--warm-dark); 
+}
+
+.form-textarea { 
+  resize: none; 
+  height: 100px; 
+}
+
+.form-input::placeholder, .form-textarea::placeholder { 
+  color: rgba(255,255,255,0.3); 
+}
  
 .form-submit {
   background: var(--gold);
@@ -121,10 +149,152 @@
   transition: all 0.35s;
   margin-top: 8px;
 }
-.form-submit:hover { background: transparent; color: var(--gold); }
+
+.form-submit:hover { 
+  background: transparent; 
+  color: var(--gold); 
+}
+
 .form-note {
   font-size: 0.7rem;
   color: rgba(255,255,255,0.22);
   line-height: 1.65;
   font-weight: 300;
+}
+
+@media (max-width: 1024px) {
+  #contacts {
+    padding: 52px 32px;
+  }
+
+  .contacts-inner {
+    gap: 60px;
+  }
+
+  footer { 
+    padding: 24px 32px; 
+    flex-direction: column; 
+    gap: 12px; 
+    text-align: center; 
+  }
+}
+
+@media (max-width: 768px) {
+  #contacts {
+    padding: 70px 24px;
+  }
+
+  .contacts-inner {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .contact-intro {
+    font-size: 0.95rem;
+    margin-top: 18px;
+  }
+
+  .contact-details {
+    margin-top: 32px;
+    gap: 18px;
+  }
+
+  .contact-item-val {
+    font-size: 0.95rem;
+  }
+
+  .contacts-inner > div:first-child {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  #contacts .section-title,
+  #contacts .section-tag,
+  #contacts .divider {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .contact-details {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-item {
+    text-align: center;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 0.9rem;
+    padding: 12px 14px;
+  }
+
+  .form-textarea {
+    height: 90px;
+  }
+
+  .form-submit {
+    font-size: 0.7rem;
+    padding: 14px;
+  }
+
+  .form-note {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #contacts {
+    padding: 60px 18px;
+  }
+
+  .contact-intro {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .contact-details {
+    gap: 16px;
+  }
+
+  .contact-item-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+  }
+
+  .contact-item-val {
+    font-size: 0.9rem;
+  }
+
+  .form-group {
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 0.58rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 0.88rem;
+    padding: 12px;
+  }
+
+  .form-textarea {
+    height: 80px;
+  }
+
+  .form-submit {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+  }
+
+  .form-note {
+    font-size: 0.62rem;
+  }
 }

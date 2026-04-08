@@ -1,5 +1,6 @@
-/* ─── SECTION BASE ─── */
-section { padding: 100px 60px; }
+section { 
+  padding: 100px 60px; 
+}
  
 .section-tag {
   font-size: 0.63rem;
@@ -30,4 +31,10 @@ section { padding: 100px 60px; }
   height: 1px;
   background: var(--gold);
   margin: 28px 0;
+}
+
+@media (max-width: 1024px) {
+  section { 
+    padding: 52px 32px; 
+  }
 }

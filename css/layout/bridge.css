@@ -1,4 +1,3 @@
-/* ─── BRIDGE STRIP (между hero и about) ─── */
 .bridge {
   background: var(--stone);
   padding: 0 60px 60px;
@@ -24,8 +23,14 @@
   gap: 24px;
   transition: background 0.3s;
 }
-.bridge-stat:last-child { border-right: none; }
-.bridge-stat:hover { background: var(--stone); }
+
+.bridge-stat:last-child { 
+  border-right: none; 
+}
+
+.bridge-stat:hover { 
+  background: var(--stone); 
+}
  
 .bridge-n {
   font-family: 'Playfair Display', serif;
@@ -43,8 +48,7 @@
   background: var(--stone-mid);
   flex-shrink: 0;
 }
- 
-.bridge-text {}
+
 .bridge-label {
   font-size: 0.68rem;
   font-weight: 500;
@@ -53,9 +57,50 @@
   color: var(--text-main);
   margin-bottom: 5px;
 }
+
 .bridge-sub {
   font-size: 0.8rem;
   line-height: 1.5;
   color: var(--text-muted);
   font-weight: 300;
+}
+
+@media (max-width: 1024px) {
+  .bridge {
+    padding: 0 24px 48px;
+  }
+
+  .bridge-inner {
+    grid-template-columns: 1fr;
+    border: 1px solid var(--stone-mid);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .bridge-stat {
+    border-right: none;
+    border-bottom: 1px solid var(--stone-mid);
+    padding: 28px 32px;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .bridge-stat:last-child {
+    border-bottom: none;
+  }
+
+  .bridge-n {
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .bridge-divider {
+    flex-shrink: 0;
+  }
+
+  .bridge-text {
+    flex: 1;
+    min-width: 0;
+  }
 }
