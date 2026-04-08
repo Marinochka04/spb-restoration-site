@@ -279,6 +279,9 @@
   nav {
     padding: 16px 20px;
   }
+  .nav-logo span {
+    font-size: 0.6rem;
+  }
 
   nav.scrolled {
     padding: 12px 20px;

@@ -15,14 +15,43 @@ nav {
 nav.scrolled { padding: 14px 60px; }
  
 .nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 1.35rem;
-  color: #fff;
-  letter-spacing: 0.06em;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ВОТ ЭТО ГЛАВНОЕ */
+  line-height: 1.05;
   text-decoration: none;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.08em;
 }
-.nav-logo span { color: var(--gold); }
+
+.nav-logo span {
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* верх */
+.nav-logo span:nth-child(1) {
+  font-size: 0.6rem;
+  opacity: 0.6;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* центр (главный акцент) */
+.nav-logo span:nth-child(2) {
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* низ */
+.nav-logo span:nth-child(3) {
+  font-size: 0.6rem;
+  opacity: 0.6;
+  font-weight: 500;
+  color: #fff;
+}
  
 .nav-links {
   display: flex;
