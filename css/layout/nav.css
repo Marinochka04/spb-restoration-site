@@ -42,7 +42,9 @@ nav.scrolled { padding: 14px 60px; }
   font-size: 0.85rem;
   color: var(--gold);
   font-weight: 700;
+  font-family: 'Isadora Cyr', cursive;
   letter-spacing: 0.12em;
+  transform: translateY(1px);
 }
 
 /* низ */

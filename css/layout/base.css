@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Isadora Cyr';
+  src: url('../../fonts/Isadora\ Cyr.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 :root {
   --gold: #B89A5E;
   --gold-light: #D4B87A;
