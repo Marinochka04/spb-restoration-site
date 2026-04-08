@@ -402,25 +402,25 @@
                 <form class="contact-form" id="contactForm">
                     <div class="form-group">
                     <label class="form-label">Организация</label>
-                    <input class="form-input" type="text" placeholder="Наименование юридического лица">
+                    <input class="form-input" name="org" type="text" placeholder="Наименование юридического лица">
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                     <div class="form-group">
                         <label class="form-label">Контактное лицо</label>
-                        <input class="form-input" type="text" placeholder="ФИО">
+                        <input class="form-input" name="person" type="text" placeholder="ФИО" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Телефон</label>
-                        <input class="form-input" type="tel" placeholder="+7 (___) ___-__-__">
+                        <input class="form-input" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
                     </div>
                     </div>
                     <div class="form-group">
                     <label class="form-label">Адрес объекта</label>
-                    <input class="form-input" type="text" placeholder="Санкт-Петербург, ул. ...">
+                    <input class="form-input" name="address" type="text" placeholder="Санкт-Петербург, ул. ...">
                     </div>
                     <div class="form-group">
                     <label class="form-label">Тип работ</label>
-                    <select class="form-select form-input">
+                    <select name="type" class="form-select form-input">
                         <option value="" disabled selected>Выберите направление</option>
                         <option>Капитальный ремонт</option>
                         <option>Реконструкция здания</option>
@@ -432,7 +432,7 @@
                     </div>
                     <div class="form-group">
                     <label class="form-label">Комментарий</label>
-                    <textarea class="form-textarea" placeholder="Кратко опишите объект, его статус охраны и предполагаемый объём работ"></textarea>
+                    <textarea class="form-textarea" name="comment" placeholder="Кратко опишите объект, его статус охраны и предполагаемый объём работ"></textarea>
                     </div>
                     <button type="submit" class="form-submit">Отправить заявку</button>
                     <p class="form-note">Направляя заявку, вы соглашаетесь с обработкой персональных данных в соответствии с Федеральным законом № 152-ФЗ. Мы не передаём ваши данные третьим лицам.</p>

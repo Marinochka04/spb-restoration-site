@@ -36,11 +36,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Form submit
   const form = document.getElementById('contactForm');
+
   if (form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      this.style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
+
+      const formEl = this;
+      const formData = new FormData(formEl);
+
+      const btn = formEl.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = 'Отправка...';
+
+      fetch('send.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.text())
+      .then(data => {
+        if (data === 'OK') {
+          formEl.style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+        } else {
+          alert('Ошибка отправки. Попробуйте позже.');
+          btn.disabled = false;
+          btn.textContent = 'Отправить заявку';
+        }
+      })
+      .catch(() => {
+        alert('Ошибка соединения');
+        btn.disabled = false;
+        btn.textContent = 'Отправить заявку';
+      });
     });
   }
 
